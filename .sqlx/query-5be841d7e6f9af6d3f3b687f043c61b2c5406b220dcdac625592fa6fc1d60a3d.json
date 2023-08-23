@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n              insert into users_permissions\n              select $1, permissions.id from permissions where permissions.code = ANY($2)\n             ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "TextArray"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "5be841d7e6f9af6d3f3b687f043c61b2c5406b220dcdac625592fa6fc1d60a3d"
+}

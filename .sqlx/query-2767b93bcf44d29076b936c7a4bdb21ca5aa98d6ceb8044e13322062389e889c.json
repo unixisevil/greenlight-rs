@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n                select permissions.code\n                from permissions\n                inner join users_permissions on users_permissions.permission_id = permissions.id\n                inner join users on users_permissions.user_id = users.id\n                where users.id = $1\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "code",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "2767b93bcf44d29076b936c7a4bdb21ca5aa98d6ceb8044e13322062389e889c"
+}

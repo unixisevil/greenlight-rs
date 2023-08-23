@@ -1,0 +1,27 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n               update users \n               set name = $1, email = $2::TEXT::CITEXT, password_hash = $3, activated = $4, version = version + 1\n               where id = $5 and version = $6\n               returning version              \n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "version",
+        "type_info": "Int4"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Text",
+        "Bool",
+        "Int8",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "9e16580c5182dcdf66c4e988ffad690d2ad55f05a1d38d0994af39de3d5ddae5"
+}

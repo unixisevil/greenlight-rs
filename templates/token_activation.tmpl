@@ -1,0 +1,39 @@
+{% match part %}
+{% when MailPart::Subject -%}
+   Activate your Greenlight account
+{%- when MailPart::PlainBody -%}
+     Hi,
+
+Please send a `PUT /v1/users/activated` request with the following JSON body to activate your account:
+
+{"token": "{{activation_token}}"}
+
+Please note that this is a one-time use token and it will expire in 3 days.
+
+Thanks,
+
+The Greenlight Team
+
+{%- when MailPart::HtmlBody -%}
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <p>Hi,</p>
+    <p>Please send a <code>PUT /v1/users/activated</code> request with the following JSON body to activate your account:</p>
+    <pre><code>
+    {"token": "{{activation_token}}"}
+    </code></pre> 
+    <p>Please note that this is a one-time use token and it will expire in 3 days.</p>
+    <p>Thanks,</p>
+    <p>The Greenlight Team</p>
+  </body>
+</html>
+
+
+{%- endmatch -%}
+
+

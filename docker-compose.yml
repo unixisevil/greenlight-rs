@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  db:
+    container_name: greenlight-postgres
+    restart: always
+    image: postgres:15.3-alpine3.18
+    environment:
+      - POSTGRES_DB=greenlight
+      - POSTGRES_USER=green
+      - POSTGRES_PASSWORD=greenpass
+      - PGDATA=/data/pgdata
+    volumes:
+      - greenlight-data:/data/pgdata
+      - ./scripts/init-tables.sql:/docker-entrypoint-initdb.d/init-tables.sql
+    networks:
+      - greenlight-net
+  redis:
+    container_name: greenlight-redis
+    restart: always
+    image: redis:7.0.12-alpine3.18
+    networks:
+      - greenlight-net      
+  api:
+    restart: on-failure
+    container_name: greenlight-api
+    image: greenlight
+    environment:
+      - GREENLIGHT_REDIS_URL=redis://greenlight-redis:6379
+      - GREENLIGHT_DB_DSN=postgres://green:greenpass@greenlight-postgres:5432/greenlight?sslmode=disable
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      network: host
+      args:
+        - https_proxy
+        - DOCKER_BUILDKIT=1
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "4000:8000"
+    networks:
+      - greenlight-net
+volumes:
+  greenlight-data:
+    name: greenlight-data
+networks:
+  greenlight-net:
+    name: greenlight-net
+

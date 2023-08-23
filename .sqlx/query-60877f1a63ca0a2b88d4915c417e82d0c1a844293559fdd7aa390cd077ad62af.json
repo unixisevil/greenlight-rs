@@ -1,0 +1,17 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n              insert into tokens (hash, user_id, expiry, scope) \n              values ($1, $2, $3, $4)   \n             ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Bytea",
+        "Int8",
+        "Timestamptz",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "60877f1a63ca0a2b88d4915c417e82d0c1a844293559fdd7aa390cd077ad62af"
+}

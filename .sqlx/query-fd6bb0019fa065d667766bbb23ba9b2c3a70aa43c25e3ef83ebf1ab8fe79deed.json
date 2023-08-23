@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n               delete from tokens where scope = $1 and user_id = $2\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "fd6bb0019fa065d667766bbb23ba9b2c3a70aa43c25e3ef83ebf1ab8fe79deed"
+}

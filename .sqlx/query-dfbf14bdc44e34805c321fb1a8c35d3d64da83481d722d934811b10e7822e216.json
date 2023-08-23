@@ -1,0 +1,27 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n                update movies \n                set title = $1, year = $2, runtime = $3, genres = $4, version = version + 1\n                where id = $5 AND version = $6\n                returning version\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "version",
+        "type_info": "Int4"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int4",
+        "Int4",
+        "TextArray",
+        "Int8",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "dfbf14bdc44e34805c321fb1a8c35d3d64da83481d722d934811b10e7822e216"
+}
